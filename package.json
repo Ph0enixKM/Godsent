@@ -1,0 +1,31 @@
+{
+  "name": "godsent",
+  "version": "1.0.0",
+  "description": "UI Framework for Magma(Script)",
+  "main": "build/bundle.js",
+  "scripts": {
+    "test": "node test/test.js",
+    "compile": "nodemon -e mg -x \"node compile.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ph0enixKM/Godsent.git"
+  },
+  "keywords": [
+    "Godsent",
+    "Magma",
+    "Script",
+    "Framework",
+    "UI"
+  ],
+  "author": "Phoenix Arts (Paweł Karaś)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ph0enixKM/Godsent/issues"
+  },
+  "homepage": "https://github.com/Ph0enixKM/Godsent#readme",
+  "dependencies": {
+    "magma-script": "^1.2.0",
+    "nodemon": "^1.18.10"
+  }
+}
