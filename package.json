@@ -1,6 +1,6 @@
 {
   "name": "godsent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "UI Framework for Magma(Script)",
   "main": "build/bundle.js",
   "scripts": {
