@@ -84,10 +84,15 @@ if (typeof(document) != 'undefined') {
 const Godsent = (() => {
     const Godsent = {
         data: {}
+
     }
 
     Godsent.Element = class {
-        constructor(render, logic) {
+        constructor(id, content) {
+
+            // Validation check
+            if (!content.render) throw ('God: Render Method is required')
+            if (typeof(id) != 'string') throw ('God: ID must be a string')
 
         }
     }
@@ -95,4 +100,11 @@ const Godsent = (() => {
     return Godsent
 })()
 
-let el = new Godsent.Element()
+new Godsent.Element('App', {
+            render: [`
+    
+        <div>
+            Hello
+        </div>
+    ', 'html'],
+})

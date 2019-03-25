@@ -83,10 +83,14 @@ if (typeof(document) != 'undefined') {
 
 const Godsent = {
     data: {}
+
 }
 
 Godsent.Element = class {
-    constructor(render, logic) {
+    constructor(id, content) {
+
+        if (!content.render) throw ('God: Render Method is required')
+        if (typeof(id) != 'string') throw ('God: ID must be a string')
 
     }
 }
