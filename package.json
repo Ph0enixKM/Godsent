@@ -7,6 +7,9 @@
     "test": "node test/test.js",
     "compile": "nodemon -e mg -x \"node compile.js\""
   },
+  "bin": {
+    "godsent": "exec/out.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Ph0enixKM/Godsent.git"
@@ -25,7 +28,8 @@
   },
   "homepage": "https://github.com/Ph0enixKM/Godsent#readme",
   "dependencies": {
-    "magma-script": "^1.2.0",
+    "live-server": "^1.2.1",
+    "magma-script": "^1.2.6",
     "nodemon": "^1.18.10"
   }
 }

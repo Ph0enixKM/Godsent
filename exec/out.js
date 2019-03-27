@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /**
  * Standard Library For MagmaScript Language
  * Copyright 2019 - Phoenix Arts (Paweł Karaś)
@@ -97,44 +99,30 @@ if (typeof(document) != 'undefined') {
 
 'use strict';
 
-const render = (() => {
-    return function(data) {
+const args = process.argv
 
-        // Check if coder requested other languages than HTML
-        if (data[1] && data[1].lower() != `html`)
-            log(`Other languages than HTML are not supported yet.`)
+const liveServer = require(`live-server`)
 
-        // Interpret Virtual DOM
-        const dom = document.implementation.createHTMLDocument(`virtual-dom`)
-        dom.body.innerHTML = data[0]
+log(args)
+log(process.cwd())
 
-        // Get Virtual DOM of the component
-        let renderContent = dom.body.children
+/*
+ -port=7777
 
-        // Check if there is one enclosing element
-        if (renderContent.length != 1)
-            log(`Content must be enclosed in one element`)
+*/
 
-        let tagName = renderContent[0].tagName
+`file://`
 
+if (args[2] == `watch`) {
+    let params = {
+        port: 7777,
+        ,
+        open: true // When false, it won`t load your browser by default.
+        file: `index.html`,
+        middleware: [(req, res, next) => {
+            log(res)
+            next()
+        }]
     }
-})()
-
-const Godsent = {
-        data: {}
-
-    },
-
-    Godsent.Element: class {
-        constructor(id, content) {
-
-            // Validation check
-            if (!content.render) throw (`God: Render Method is required`)
-            if (typeof(id) != `string`) throw (`God: ID must be a string`)
-
-            render(content.render)
-
-        }
-    }
-
-module.exports = Godsent
+    liveServer.start(params)
+}

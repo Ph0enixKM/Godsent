@@ -9,3 +9,9 @@ new MagmaScript({
     input: __dirname + '/test/test.mg',
     output: __dirname + '/test/test.js'
 })
+
+new MagmaScript({
+    input: __dirname + '/exec/run.mg',
+    output: __dirname + '/exec/out.js',
+    global: true
+})

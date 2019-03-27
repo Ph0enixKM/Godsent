@@ -19,6 +19,22 @@ Array.prototype.last = function() {
     return this[this.length - 1]
 }
 
+String.prototype.lower = function() {
+    return this.toLowerCase()
+}
+
+String.prototype.upper = function() {
+    return this.toUpperCase()
+}
+
+String.prototype.firstLower = function() {
+    return this[0].toLowerCase() + this.substring(1)
+}
+
+String.prototype.firstUpper = function() {
+    return this[0].toUpperCase() + this.substring(1)
+}
+
 if (typeof(document) != 'undefined') {
     function element(query) {
         return document.querySelector(query)
@@ -82,29 +98,92 @@ if (typeof(document) != 'undefined') {
 'use strict';
 
 const Godsent = (() => {
-    const Godsent = {
-        data: {}
+    const render = (() => {
+        return function(data) {
 
-    }
+            // Check if coder requested other languages than HTML
+            if (data[1] && data[1].lower() != `html`)
+                log(`Other languages than HTML are not supported yet.`)
 
-    Godsent.Element = class {
-        constructor(id, content) {
+            // Interpret Virtual DOM
+            const dom = document.implementation.createHTMLDocument(`virtual-dom`)
+            dom.body.innerHTML = data[0]
 
-            // Validation check
-            if (!content.render) throw ('God: Render Method is required')
-            if (typeof(id) != 'string') throw ('God: ID must be a string')
+            // Get Virtual DOM of the component
+            let renderContent = dom.body.children
+
+            // Check if there is one enclosing element
+            if (renderContent.length != 1)
+                log(`Content must be enclosed in one element`)
+
+            let tagName = renderContent[0].tagName
 
         }
-    }
+    })()
+
+    const Godsent = {
+            data: {}
+
+        },
+
+        Godsent.Element: class {
+            constructor(id, content) {
+
+                // Validation check
+                if (!content.render) throw (`God: Render Method is required`)
+                if (typeof(id) != `string`) throw (`God: ID must be a string`)
+
+                render(content.render)
+
+            }
+        }
 
     return Godsent
 })()
 
-new Godsent.Element('App', {
-            render: [`
+new Godsent.Element(`App`, {
+    render = [`
     
         <div>
             Hello
         </div>
-    ', 'html'],
+    `]
 })
+
+/*
+
+export new Godsent.Element(`App`, {
+    
+    render = [`
+        <div onclick={getAge}>
+            <h1> Hello World </h1>
+            <a> Click Me! </a>
+        </div>
+    `, `html`]
+
+    tree data {
+        age = 18 // This value is going to be updated here by default
+        battery = Godsent.Subscribe(`battery-state`, `battery`) // It`s going to be updated on each change
+
+        getAge(event) {
+            log(this.age)
+        }
+    }
+
+    onMount() {
+        log(`Mounted!`)
+    }
+
+    onUnmount() {
+        log(`Unmounted!`)
+    }
+
+    style(`
+        div
+            width : 100px
+        h1
+            color: red
+    `, `sass`)
+})
+
+*/

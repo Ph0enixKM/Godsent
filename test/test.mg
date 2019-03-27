@@ -6,7 +6,7 @@ new Godsent.Element('App', {
         <div>
             Hello
         </div>
-    ', 'html']
+    ']
 })
 
 /*
